@@ -7,7 +7,11 @@ import {
   ListWrapper,
 } from './ProductsListView.styles';
 
-export const ProductsListView = () => {
+interface Props {
+  isAdmin: boolean;
+}
+
+export const ProductsListView = ({ isAdmin }: Props) => {
   const PAGINATION_COUNT = 3;
   const [products, setProducts] = useState<GetAllProductsRes[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -19,7 +23,9 @@ export const ProductsListView = () => {
     setProducts(null);
     setOffset(off);
     const res = await fetch(
-      `http://localhost:3001/product/${offset}/${PAGINATION_COUNT}`
+      `http://localhost:3001/${
+        isAdmin ? 'admin' : 'product'
+      }/${offset}/${PAGINATION_COUNT}`
     );
     const data: GetAllProductsRes[] = await res.json();
 
@@ -64,7 +70,12 @@ export const ProductsListView = () => {
       <ListWrapper>
         {products ? (
           products.map((product) => (
-            <ProductsListItem key={product.id} product={product} />
+            <ProductsListItem
+              key={product.id}
+              product={product}
+              isAdmin={isAdmin}
+              onProductsChange={() => refreshProducts(offset)}
+            />
           ))
         ) : (
           <div>

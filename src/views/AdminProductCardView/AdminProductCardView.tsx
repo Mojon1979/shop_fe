@@ -1,36 +1,55 @@
-import React, { FormEvent, useState } from 'react';
-import { NewProductEntity, AddProductRes } from 'types';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { GetOneProductForAdminRes } from 'types';
+import { useParams } from 'react-router-dom';
 
-export const AdminAddProductView = () => {
-  const [form, setForm] = useState<NewProductEntity>({
+export const AdminProductCardView = () => {
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [product, setProduct] = useState<GetOneProductForAdminRes>({
     name: '',
     description: '',
-    url: 'https://via.placeholder.com/',
+    url: '',
     price: 0,
     count: 0,
   });
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [resultInfo, setResultInfo] = useState<string | null>(null);
+  const { id } = useParams();
 
   const updateForm = (key: string, value: string | number) => {
-    setForm((prevForm) => ({
-      ...prevForm,
+    setProduct((prevProduct) => ({
+      ...prevProduct,
       [key]: value,
     }));
+  };
+
+  const refreshProduct = async () => {
+    setProduct({
+      name: '',
+      description: '',
+      url: '',
+      price: 0,
+      count: 0,
+    });
+
+    const res = await fetch(`http://localhost:3001/admin/card/${id}`);
+
+    if ([400, 500].includes(res.status)) {
+      const error = await res.json();
+      setErrorMessage(error.message);
+      return;
+    }
+
+    const data: GetOneProductForAdminRes = await res.json();
+    setProduct(data);
   };
 
   const sendForm = async (e: FormEvent) => {
     e.preventDefault();
 
-    setIsLoading(true);
-
-    const res = await fetch(`http://localhost:3001/admin/add`, {
-      method: 'POST',
+    const res = await fetch(`http://localhost:3001/admin/card/`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(product),
     });
 
     if ([400, 500].includes(res.status)) {
@@ -39,32 +58,13 @@ export const AdminAddProductView = () => {
       return;
     }
 
-    const data: AddProductRes = await res.json();
-
-    setResultInfo(`${data.name} added with ${data.id}.`);
-    setForm({
-      name: '',
-      description: '',
-      url: 'https://via.placeholder.com/',
-      price: 0,
-      count: 0,
-    });
-
-    setIsLoading(false);
+    const data: GetOneProductForAdminRes = await res.json();
+    setProduct(data);
   };
 
-  if (resultInfo !== null && !isLoading) {
-    return (
-      <div>
-        <p>
-          <strong>{resultInfo}</strong>
-        </p>
-        <button type="button" onClick={() => setResultInfo(null)}>
-          Add another one
-        </button>
-      </div>
-    );
-  }
+  useEffect(() => {
+    refreshProduct();
+  }, []);
 
   if (errorMessage) {
     return (
@@ -84,7 +84,7 @@ export const AdminAddProductView = () => {
           Name: <br />
           <input
             type="text"
-            value={form.name}
+            value={product.name}
             required
             maxLength={35}
             onChange={(e) => updateForm('name', e.target.value)}
@@ -95,7 +95,7 @@ export const AdminAddProductView = () => {
         <label>
           Description: <br />
           <textarea
-            value={form.description}
+            value={product.description}
             required
             maxLength={255}
             onChange={(e) => updateForm('description', e.target.value)}
@@ -104,14 +104,13 @@ export const AdminAddProductView = () => {
       </p>
       <p>
         <label>
-          Image URL: <br />
-          <input
-            type="text"
-            value={form.url}
+          Image URL:: <br />
+          <textarea
+            value={product.url}
             required
             maxLength={100}
             disabled
-            onChange={(e) => updateForm('name', e.target.value)}
+            onChange={(e) => updateForm('description', e.target.value)}
           />
         </label>
       </p>
@@ -120,8 +119,7 @@ export const AdminAddProductView = () => {
           Price: <br />
           <input
             type="number"
-            value={form.price}
-            required
+            value={product.price}
             step={0.01}
             min={0}
             max={999999.99}
@@ -134,14 +132,14 @@ export const AdminAddProductView = () => {
           Count: <br />
           <input
             type="number"
-            value={form.count}
+            value={product.count}
             min={0}
             max={9999}
             onChange={(e) => updateForm('count', Number(e.target.value))}
           />
         </label>
       </p>
-      <button type="submit">Add</button>
+      <button type="submit">Update product</button>
     </form>
   );
 };

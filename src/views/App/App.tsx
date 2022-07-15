@@ -7,6 +7,7 @@ import { Wrapper } from './App.styles';
 import { GuestLayout } from '../HuestLayout';
 import { ProductCardView } from '../ProductCardView/ProductCardView';
 import { AdminAddProductView } from '../AdminAddProductView/AdminAddProductView';
+import { AdminProductCardView } from '../AdminProductCardView/AdminProductCardView';
 
 export const App = () => {
   return (
@@ -16,10 +17,15 @@ export const App = () => {
         <Wrapper>
           <Routes>
             <Route path="/" element={<GuestLayout />}>
-              <Route path="/product" element={<ProductsListView />} />
+              <Route
+                path="/product"
+                element={<ProductsListView isAdmin={false} />}
+              />
               <Route path="/product/:id" element={<ProductCardView />} />
-              <Route path="/admin/add" element={<AdminAddProductView />} />
             </Route>
+            <Route path="/admin" element={<ProductsListView isAdmin />} />
+            <Route path="/admin/card/:id" element={<AdminProductCardView />} />
+            <Route path="/admin/add" element={<AdminAddProductView />} />
           </Routes>
         </Wrapper>
       </MainTemplate>

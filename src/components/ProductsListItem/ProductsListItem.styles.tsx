@@ -24,3 +24,18 @@ export const Item = styled.ul`
     height: 220px;
   }
 `;
+
+export const DeleteBtn = styled.button`
+  border: none;
+  box-shadow: 0 0 4px 2px #305534;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #555b56;
+  font-weight: bold;
+  background-color: #f0ffee;
+
+  :hover {
+    background-color: #ced0cd;
+    transition: 0.2s;
+  }
+`;
