@@ -6,6 +6,7 @@ import { GlobalStyle } from '../../assets/styles/GlobalStyle';
 import { Wrapper } from './App.styles';
 import { GuestLayout } from '../HuestLayout';
 import { ProductCardView } from '../ProductCardView/ProductCardView';
+import { AdminAddProductView } from '../AdminAddProductView/AdminAddProductView';
 
 export const App = () => {
   return (
@@ -17,7 +18,7 @@ export const App = () => {
             <Route path="/" element={<GuestLayout />}>
               <Route path="/product" element={<ProductsListView />} />
               <Route path="/product/:id" element={<ProductCardView />} />
-              <Route path="/admin/add" element={<ProductCardView />} />
+              <Route path="/admin/add" element={<AdminAddProductView />} />
             </Route>
           </Routes>
         </Wrapper>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { GetOneProductRes } from 'types';
-import styled from 'styled-components';
+import { DescriptionWrapper, Wrapper } from './ProductCard.styles';
+import { BtnLink } from '../../components/BtnLink/BtnLink.styles';
 
 export const ProductCardView = () => {
   const [product, setProduct] = useState<GetOneProductRes | null>(null);
@@ -30,22 +31,12 @@ export const ProductCardView = () => {
     refreshProduct();
   }, []);
 
-  const Wrapper = styled.section`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 1200px;
-    height: 100%;
-  `;
-
   const productCard = (
     <Wrapper>
       {product ? (
         <>
-          <div>
-            <img src={`${product.url}500`} alt="" />
-          </div>
-          <ul>
+          <img src={`${product.url}500`} alt="" />
+          <DescriptionWrapper>
             <li>
               <h2>{product.name}</h2>
             </li>
@@ -60,11 +51,11 @@ export const ProductCardView = () => {
                   </p>
                 </li>
                 <li>
-                  <Link to={`/product/cart/${id}`}>Add to Cart</Link>
+                  <BtnLink to={`/product/cart/${id}`}>Add to Cart</BtnLink>
                 </li>
               </ul>
             </li>
-          </ul>
+          </DescriptionWrapper>
         </>
       ) : (
         <div>

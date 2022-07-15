@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetAllProductsRes } from 'types';
-import { BtnLink, Item, Wrapper } from './ProductsListItem.styles';
+import { Item, Wrapper } from './ProductsListItem.styles';
+import { BtnLink } from '../BtnLink/BtnLink.styles';
 
 interface Props {
   product: GetAllProductsRes;
