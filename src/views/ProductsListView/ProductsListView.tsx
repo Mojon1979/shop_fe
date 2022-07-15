@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { GetAllProductsRes } from 'types';
-import { ProductItem } from '../../components/ProductItem/ProductItem';
-import { Wrapper } from './ProductsView.styles';
+import { ProductsListItem } from '../../components/ProductsListItem/ProductsListItem';
+import { Wrapper } from './ProductsListView.styles';
 
-export const ProductsView = () => {
+export const ProductsListView = () => {
   const [products, setProducts] = useState<GetAllProductsRes[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export const ProductsView = () => {
     <Wrapper>
       {products ? (
         products.map((product) => (
-          <ProductItem key={product.id} product={product} />
+          <ProductsListItem key={product.id} product={product} />
         ))
       ) : (
         <div>

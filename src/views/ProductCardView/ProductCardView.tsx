@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { GetOneProductRes } from 'types';
 import styled from 'styled-components';
 
-export const ProductDetailView = () => {
+export const ProductCardView = () => {
   const [product, setProduct] = useState<GetOneProductRes | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,11 +37,6 @@ export const ProductDetailView = () => {
     width: 1200px;
     height: 100%;
   `;
-
-  // const ProductCard = styled.div`
-  //   display: flex;
-  //   align-content: space-between;
-  // `;
 
   const productCard = (
     <Wrapper>

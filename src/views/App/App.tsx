@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ProductsView } from '../ProductsView/ProductsView';
+import { ProductsListView } from '../ProductsListView/ProductsListView';
 import { MainTemplate } from '../../components/templates/MainTemplate/MainTemplate';
 import { GlobalStyle } from '../../assets/styles/GlobalStyle';
 import { Wrapper } from './App.styles';
 import { GuestLayout } from '../HuestLayout';
-import { ProductDetailView } from '../ProductDetailView/ProductDetailView';
+import { ProductCardView } from '../ProductCardView/ProductCardView';
 
 export const App = () => {
   return (
@@ -15,8 +15,9 @@ export const App = () => {
         <Wrapper>
           <Routes>
             <Route path="/" element={<GuestLayout />}>
-              <Route path="/product" element={<ProductsView />} />
-              <Route path="/product/:id" element={<ProductDetailView />} />
+              <Route path="/product" element={<ProductsListView />} />
+              <Route path="/product/:id" element={<ProductCardView />} />
+              <Route path="/admin/add" element={<ProductCardView />} />
             </Route>
           </Routes>
         </Wrapper>

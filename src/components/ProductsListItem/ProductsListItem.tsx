@@ -1,12 +1,14 @@
 import React from 'react';
 import { GetAllProductsRes } from 'types';
-import { BtnLink, Item, Wrapper } from './ProductItem.styles';
+import { BtnLink, Item, Wrapper } from './ProductsListItem.styles';
 
 interface Props {
   product: GetAllProductsRes;
 }
 
-export const ProductItem = ({ product: { id, name, price, url } }: Props) => {
+export const ProductsListItem = ({
+  product: { id, name, price, url },
+}: Props) => {
   return (
     <Wrapper>
       <Item>
