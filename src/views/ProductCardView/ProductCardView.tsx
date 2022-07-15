@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GetOneProductRes } from 'types';
 import { DescriptionWrapper, Wrapper } from './ProductCard.styles';
-import { BtnLink } from '../../components/BtnLink/BtnLink.styles';
+// import { BtnLink } from '../../components/BtnLink/BtnLink.styles';
 
 export const ProductCardView = () => {
   const [product, setProduct] = useState<GetOneProductRes | null>(null);
@@ -50,9 +50,9 @@ export const ProductCardView = () => {
                     Price: <strong>{product.price.toFixed(2)}$</strong>
                   </p>
                 </li>
-                <li>
-                  <BtnLink to={`/product/cart/${id}`}>Add to Cart</BtnLink>
-                </li>
+                {/* <li> */}
+                {/*  <BtnLink to={`/product/cart/${id}`}>Add to Cart</BtnLink> */}
+                {/* </li> */}
               </ul>
             </li>
           </DescriptionWrapper>

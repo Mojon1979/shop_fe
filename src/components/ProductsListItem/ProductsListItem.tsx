@@ -51,13 +51,16 @@ export const ProductsListItem = ({
             <BtnLink to={`/${isAdmin ? 'admin/card' : 'product'}/${id}`}>
               Details
             </BtnLink>
-            {isAdmin ? (
-              <DeleteBtn type="button" onClick={deleteProduct}>
-                Delete
-              </DeleteBtn>
-            ) : (
-              <BtnLink to={`/product/cart/${id}`}>Add to Cart</BtnLink>
-            )}
+            {
+              isAdmin ? (
+                <DeleteBtn type="button" onClick={deleteProduct}>
+                  Delete
+                </DeleteBtn>
+              ) : null
+              //   (
+              //   <BtnLink to={`/product/cart/${id}`}>Add to Cart</BtnLink>
+              // )
+            }
           </ul>
         </li>
       </Item>
