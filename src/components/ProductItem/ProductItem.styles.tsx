@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Wrapper = styled.ul`
+export const Wrapper = styled.div`
+  flex-basis: 30%;
+  max-width: 320px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: #8e9595 0 0 6px;
+`;
+
+export const Item = styled.ul`
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
@@ -24,7 +32,7 @@ export const BtnLink = styled(Link)`
   text-decoration: none;
   color: #555b56;
   font-weight: bold;
-  background-color: #efefd1;
+  background-color: #f0ffee;
 
   :hover {
     background-color: #ced0cd;

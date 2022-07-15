@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../../Header/Header';
-import { Navigation } from '../../Navigation/Navigation';
+// import { Navigation } from '../../Navigation/Navigation';
 import { Wrapper } from './MainTemplate.styles';
 
 interface Props {
@@ -11,7 +11,7 @@ export const MainTemplate = ({ children }: Props) => {
   return (
     <Wrapper>
       <Header />
-      <Navigation />
+      {/* <Navigation /> */}
       {children}
     </Wrapper>
   );

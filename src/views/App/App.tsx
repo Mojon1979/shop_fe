@@ -5,6 +5,7 @@ import { MainTemplate } from '../../components/templates/MainTemplate/MainTempla
 import { GlobalStyle } from '../../assets/styles/GlobalStyle';
 import { Wrapper } from './App.styles';
 import { GuestLayout } from '../HuestLayout';
+import { ProductDetailView } from '../ProductDetailView/ProductDetailView';
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<GuestLayout />}>
               <Route path="/product" element={<ProductsView />} />
+              <Route path="/product/:id" element={<ProductDetailView />} />
             </Route>
           </Routes>
         </Wrapper>

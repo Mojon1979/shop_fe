@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GetAllProductsRes } from 'types';
-import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { ProductItem } from '../../components/ProductItem/ProductItem';
 import { Wrapper } from './ProductsView.styles';
 
 export const ProductsView = () => {
@@ -33,7 +33,7 @@ export const ProductsView = () => {
     <Wrapper>
       {products ? (
         products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductItem key={product.id} product={product} />
         ))
       ) : (
         <div>

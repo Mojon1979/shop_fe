@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  flex-basis: 30%;
-  max-width: 320px;
-  margin: 20px 0;
-  text-align: center;
-  box-shadow: #8e9595 0px 0px 6px 0px;
+export const Wrapper = styled.section`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 1400px;
+  height: 100%;
+  padding: 25px 0 0;
 `;
